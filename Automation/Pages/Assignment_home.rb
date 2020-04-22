@@ -60,11 +60,11 @@ module Pages
                
             end
 
-            def chooseDateOption(option,date=null)
+            def chooseDateOption(option,date=null,comment=null)
                 selectDateOption(option).click()
                 clickNextButton()
                 if(option=='On a specific date')
-                    
+                    chooseData[]
                 elsif(option=='Other(I will need to confirm)')
 
                 end
