@@ -1,0 +1,2 @@
+source 'https://rubygems.org'
+gem 'webframe', :git => 'git@github.com:freshdesk/WebFrame.git', :ref => '4f05a70'
