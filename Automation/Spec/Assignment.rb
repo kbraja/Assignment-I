@@ -1,6 +1,6 @@
 require 'selenium-webdriver'
 require 'date'
-describe 'Assignment - Boopathiraja' do
+describe 'Assignment' do
     
     #Browser initialization
     before(:all) do

@@ -7,16 +7,6 @@ module Pages
                 @driver = driver
             end
 
-            def chooseLocation(location)
-                @LOCATION.clear()
-                @LOCATION.send_keys(location)
-                selectLocation(location).click()
-
-                clickGoButton()
-
-                clickNextButton()
-            end
-
             def clickGoButton()
                 @GO_BUTTON.click()
             end
@@ -33,13 +23,22 @@ module Pages
                 @SKIP_BUTTON.click()
             end
 
+            def chooseLocation(location)
+                @LOCATION.clear()
+                @LOCATION.send_keys(location)
+                selectLocation(location).click()
+
+                clickGoButton()
+
+                clickNextButton()
+            end
+
             def chooseThings(parts)
                 for part in parts do
                     if part.include? 'Other'
                         @OTHER_PART.click()
                         mention = part.split("-")
                         @OTHER_PART.send_keys(mention[1])
-
                     else
                         selectThings(part).click() 
                     end
