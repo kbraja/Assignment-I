@@ -30,7 +30,8 @@ describe 'Assignment - Boopathiraja' do
         @assignment_home.comment(sampleText)
 
         @assignment_home.chooseDateOption(dateOption)
-        binding.pry
+       
+        @assignment_home.chooseDateOption(dateOption)
     end
 
     #Close Browser
