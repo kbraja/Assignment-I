@@ -2,18 +2,7 @@ browser: chrome
 mode: single
 
 specs:
-    - spec/api/agents_spec.rb
-    - spec/api/assignment_spec.rb
-    - spec/api/bots_spec.rb
-    - spec/api/business_spec.rb
-    - spec/api/campaign_rules_spec.rb
-    - spec/api/channels_spec.rb
-    - spec/api/faqs_spec.rb
-    - spec/api/groups_spec.rb
-    - spec/api/inbox_spec.rb
-    - spec/api/label_spec.rb
-    - spec/api/manual_campaign_spec.rb
-    - spec/widget/widget_runner.rb
+    - Spec/Assignment.rb
 
 dimensions:
    horizontal: 1280
