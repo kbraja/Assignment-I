@@ -1,3 +1,4 @@
+require 'date'
 describe 'Assignment - Boopathiraja' do
     
     #Browser initialization
@@ -30,8 +31,12 @@ describe 'Assignment - Boopathiraja' do
         @assignment_home.comment(sampleText)
 
         @assignment_home.chooseDateOption(dateOption)
-       
-        @assignment_home.chooseDateOption(dateOption)
+
+        date = Date.today + 2
+        targetDate = date.strftime('%d')
+        targetMonth = date.strftime('%B')
+        targetYear = date.strftime('%Y')
+        @assignment_home.chooseData(targetDate,targetMonth,targetYear) 
     end
 
     #Close Browser

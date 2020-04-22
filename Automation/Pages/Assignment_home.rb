@@ -60,8 +60,22 @@ module Pages
                
             end
 
-            def chooseDateOption(option)
+            def chooseDateOption(option,date=null)
                 selectDateOption(option).click()
+                clickNextButton()
+                if(option=='On a specific date')
+                    
+                elsif(option=='Other(I will need to confirm)')
+
+                end
+
+            def chooseData(date,month,year)
+                current_month_year = Time.new.strftime('%B %Y')
+                target_month_year = month+' '+year
+                while(current_month_year!=target_month_year ) do
+                    @NEXT_MONTH.click()
+                end
+                selectDate(date).click()
                 clickNextButton()
             end
 
