@@ -1,14 +1,15 @@
 require 'selenium-webdriver'
 require 'date'
+require_relative 'Assignment_home.rb'
 describe 'Assignment' do
     
     #Browser initialization
     before(:all) do
-        # @driver = Selenium::WebDriver.for :chrome
-        @driver = Driver.new
+        @driver = Selenium::WebDriver.for :chrome
+        # @driver = Driver.new
         @base_url = 'https://www.starofservice.in/dir/telangana/hyderabad/hyderabad/plumbing#/'
         @wait = Selenium::WebDriver::Wait.new(:timeout => 20,interval: 5)
-        @assignment_home = Pages::AssignmentHome.new(@driver)
+        @assignment_home = AssignmentHome.new(@driver)
         @driver.get(@base_url)
     end
 
@@ -30,6 +31,7 @@ describe 'Assignment' do
         
         dateOption = 'On a specific date'
         @assignment_home.chooseDateOption(dateOption)
+        
         date = Date.today + 2
         targetDate = date.strftime('%d')
         targetMonth = date.strftime('%B')
@@ -45,6 +47,6 @@ describe 'Assignment' do
 
     #Quit Browser
     after :all do
-        @driver.quit()
+        @driver.quit
     end
 end
