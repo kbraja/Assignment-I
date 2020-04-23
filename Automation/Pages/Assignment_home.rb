@@ -1,44 +1,40 @@
 require 'selenium-webdriver'
 module Pages
-    module WebActions
-        class AssignmentHome < Locators::AssignmentHome
+        class AssignmentHome 
             def initialize(driver)
-                super()
                 @driver = driver
             end
 
             def clickGoButton()
-                @GO_BUTTON.click()
+                @driver.find_element(:xpath,"//button[text()[contains(.,'Go')]]").click()
             end
 
             def clickNextButton()
-                @NEXT_BUTTON.click()
+                @driver.find_element(:xpath, "//button[text()='Next']").click()
             end
 
             def clickBackButton()
-                @BACK_BUTTON.click()
+                @driver.find_element(:xpath, "//button[text()='Back']").click()
             end
 
             def clickSkipButton()
-                @SKIP_BUTTON.click()
+                @driver.find_element(:xpath,"//button[text()='Skip']").click()
             end
 
             def chooseLocation(location)
-                @LOCATION.clear()
-                @LOCATION.send_keys(location)
+                @driver.find_element(:css,'input.postal-code').clear()
+                @driver.find_element(:css,'input.postal-code').send_keys(location)
                 selectLocation(location).click()
-
                 clickGoButton()
-
                 clickNextButton()
             end
 
             def chooseThings(parts)
                 for part in parts do
                     if part.include? 'Other'
-                        @OTHER_PART.click()
+                        @driver.find_element(:xpath,"//input[@class[contains(.,'text-field__input')]]").click()
                         mention = part.split("-")
-                        @OTHER_PART.send_keys(mention[1])
+                        @driver.find_element(:xpath,"//input[@class[contains(.,'text-field__input')]]").send_keys(mention[1])
                     else
                         selectThings(part).click() 
                     end
@@ -62,8 +58,8 @@ module Pages
 
             def comment(text=nil)
                 if(text!=nil)
-                    @COMMENT.clear()
-                    @COMMENT.send_keys(text)
+                    @driver.find_element(:css,"textarea.text-area__textArea___2N_HC").clear()
+                    @driver.find_element(:css,"textarea.text-area__textArea___2N_HC").send_keys(text)
                     clickNextButton()
                 else
                     clickSkipButton()
@@ -79,7 +75,7 @@ module Pages
                 current_month_year = Time.new.strftime('%B %Y')
                 target_month_year = month+' '+year
                 while(current_month_year!=target_month_year ) do
-                    @NEXT_MONTH.click()
+                    @driver.find_element(:css,"i.styles__nextIcon___PJOhO").click()
                 end
                 dateToBeSelected = month+' '+date+', '+year
                 selectDate(dateToBeSelected).click()
@@ -87,21 +83,50 @@ module Pages
             end
 
             def chooseSlot(slot,duration=nil)
-                timeSlot = @driver.find_element(@TIME_SLOT)
+                timeSlot = @driver.find_element(:xpath,"//select[@class[contains(.,'select__selectBoxInput')]]")
                 options = timeSlot.find_elements(tag_name: 'option')
                 options.each { |option| option.click if option.text == slot}
                 if(duration!=nil)
-                    @DURATION.clear()
-                    @DURATION.send_keys(duration)
+                    @driver.find_element(:xpath,"//input[@class[contains(.,'text-field')]]").clear()
+                    @driver.find_element(:xpath,"//input[@class[contains(.,'text-field')]]").send_keys(duration)
                 end
                 clickNextButton() 
             end
 
             def fillEmail(email)
-                @EMAIL.clear()
-                @EMAIL.send_keys(email)
+                @driver.find_element(:xpath,"//input[@class[contains(.,'text-field__input')]]").clear()
+                @driver.find_element(:xpath,"//input[@class[contains(.,'text-field__input')]]").send_keys(email)
             end
-            
+
+            #locator function
+            def selectLocation(location)
+                return @driver.find_element(:xpath,"//div[@data-val='"+location+"']/b[text()='"+location+"']")
+            end
+    
+            def selectThings(part)
+                return @driver.find_element(:xpath,"//div[text()[contains(.,'"+part+"')]]")
+            end
+    
+            def selectAction(action)
+                return @driver.find_element(:xpath,"//div[text()[contains(.,'"+action+"')]]")
+            end
+    
+            def selectReason(reason)
+                return @driver.find_element(:xpath,"//div[text()[contains(.,'"+reason+"')]]")
+            end
+    
+            def selectDateOption(option)
+                return @driver.find_element(:xpath,"//div[text()[contains(.,'"+option+"')]]")
+            end
+    
+            def selectDate(date)
+                return @driver.find_element(:xpath,"//button[@aria-label[contains(.,'"+date+"')]]")
+            end
+    
+            def selectSlot(slot)
+                return @driver.find_element(:xpath,"//option[text()[contains(.,'"+slot+"')]]")
+            end
+
         end
     end
 end

@@ -6,14 +6,9 @@ describe 'Assignment' do
     before(:all) do
         # @driver = Selenium::WebDriver.for :chrome
         @driver = Driver.new
-        @data_conf = YAML.load_file('conf/data_conf.yml')
-        @base_url = @data_conf['account_details']['base_url']
+        @base_url = 'https://www.starofservice.in/dir/telangana/hyderabad/hyderabad/plumbing#/'
         @wait = Selenium::WebDriver::Wait.new(:timeout => 20,interval: 5)
-        @assignment_home = Pages::WebActions::AssignmentHome.new(@driver)
-    end
-
-    #Load the Page
-    before(:each) do
+        @assignment_home = Pages::AssignmentHome.new(@driver)
         @driver.get(@base_url)
     end
 
@@ -48,13 +43,8 @@ describe 'Assignment' do
         @wait.until{(@assignment_home.EMAIL).displayed?}
     end
 
-    #Close Browser
-    after(:each) do
-        @driver.close()
-    end
-
     #Quit Browser
-    after(:all) do
+    after :all do
         @driver.quit()
     end
 end
