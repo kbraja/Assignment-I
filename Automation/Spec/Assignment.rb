@@ -4,8 +4,8 @@ describe 'Assignment' do
     
     #Browser initialization
     before(:all) do
-        @driver = Selenium::WebDriver.for :chrome
-        # @driver = Driver.new
+        options = Selenium::WebDriver::Chrome::Options.new(options: {"excludeSwitches" => ["enable-automation"]})
+        @driver = Selenium::WebDriver.for :chrome, options: options
         @base_url = 'https://www.starofservice.in/dir/telangana/hyderabad/hyderabad/plumbing#/'
         @wait = Selenium::WebDriver::Wait.new(:timeout => 20,interval: 5)
         @assignment_home = Pages::AssignmentHome.new(@driver)
