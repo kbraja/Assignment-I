@@ -8,6 +8,7 @@ module Pages
             OTHER_PART = {xpath: "//input[@class[contains(.,'text-field__input')]]"}
             COMMENT = {css: "textarea.text-area__textArea___2N_HC"}
             NEXT_MONTH = {css: "i.styles__nextIcon___PJOhO"}
+            CHOOSEN_MONTH = {xpath: "//div[@class[contains(.,'CalendarMonth')] and @data-visible='true']/div[@class[contains(.,'CalendarMonth_caption')]]"}
             TIME_SLOT = {xpath: "//select[@class[contains(.,'select__selectBoxInput')]]"}
             DURATION = {xpath: "//input[@class[contains(.,'text-field')]]"}
             EMAIL = {xpath: "//input[@class[contains(.,'text-field__input')]]"}
@@ -143,16 +144,21 @@ module Pages
 
             #function to choose a date 
             #
-            #@param date[String] date to be selected
-            #@param month[String] month to be selected
-            #@param year[String] year to be selected
-            def chooseData(date,month,year)
-                current_month_year = Time.new.strftime('%B %Y')
-                target_month_year = month+' '+year
+            #@param noOfDayFromCurrentday[Integer] number of day from current day
+            def chooseData(noOfDayFromCurrentday=1)
+                date = Date.today + noOfDayFromCurrentday
+                targetDate = date.strftime('%d').to_i
+                targetMonth = date.strftime('%B')
+                targetYear = date.strftime('%Y')
+
+                current_month_year = @driver.find_element(CHOOSEN_MONTH).text()
+                target_month_year = date.strftime('%B %Y')
                 while(current_month_year!=target_month_year ) do
                     @driver.find_element(NEXT_MONTH).click()
+                    @wait.until{ @driver.find_element(CHOOSEN_MONTH).displayed?}
+                    current_month_year = @driver.find_element(CHOOSEN_MONTH).text()
                 end
-                dateToBeSelected = month+' '+date+', '+year
+                dateToBeSelected = targetMonth+' '+targetDate.to_s+', '+targetYear
                 selectDate(dateToBeSelected).click()
                 clickNextButton()
             end

@@ -31,12 +31,9 @@ describe 'Assignment' do
         dateOption = 'On a specific date'
         @assignment_home.chooseDateOption(dateOption)
         
-        date = Date.today + 2
-        targetDate = date.strftime('%d')
-        targetMonth = date.strftime('%B')
-        targetYear = date.strftime('%Y')
-        @assignment_home.chooseData(targetDate,targetMonth,targetYear)
-
+        noOfDayFromCurrentday = 2
+        @assignment_home.chooseData(noOfDayFromCurrentday)
+ 
         slot = '03:00'
         duration = '4'
         @assignment_home.chooseSlot(slot,duration)
