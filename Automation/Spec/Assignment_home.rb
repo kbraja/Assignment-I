@@ -12,6 +12,9 @@ module Pages
             TIME_SLOT = {xpath: "//select[@class[contains(.,'select__selectBoxInput')]]"}
             DURATION = {xpath: "//input[@class[contains(.,'text-field')]]"}
             EMAIL = {xpath: "//input[@class[contains(.,'text-field__input')]]"}
+            PARTS_TITLE = {xpath: "//div[text()='The problems are to do with which of the following things?']"}
+            ACTIONS_TITLE = {xpath: "//div[text()='What do you need done?']"}
+            REASON_TITLE = {xpath: "//div[text()='What problem(s) do you have?']"}
 
             def initialize(driver)
                 @driver = driver
@@ -89,6 +92,7 @@ module Pages
             #
             #@param parts[Array] List of parts to be choosen
             def chooseThings(parts)
+                @wait.until{ @driver.find_element(PARTS_TITLE).displayed?}
                 for part in parts do
                     if part.include? 'Other'
                         @driver.find_element(OTHER_PART).click()
@@ -105,6 +109,7 @@ module Pages
             #
             #@param actions[Array] List of actions to be choosen
             def chooseAction(actions)
+                @wait.until{ @driver.find_element(ACTIONS_TITLE).displayed?}
                 for action in actions do
                     selectAction(action).click()
                 end
@@ -115,6 +120,7 @@ module Pages
             #
             #@param reasons[String] reason to be given
             def chooseReason(reasons)
+                @wait.until{ @driver.find_element(REASON_TITLE).displayed?}
                 for reason in reasons do
                     selectReason(reason).click()
                 end
