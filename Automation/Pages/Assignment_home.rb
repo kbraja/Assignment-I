@@ -94,8 +94,8 @@ module Pages
             end
 
             def fillEmail(email)
-                @driver.find_element(:xpath,"//input[@class[contains(.,'text-field__input')]]").clear()
-                @driver.find_element(:xpath,"//input[@class[contains(.,'text-field__input')]]").send_keys(email)
+                getEmail.clear()
+                getEmail.send_keys(email)
             end
 
             #locator function
@@ -125,6 +125,10 @@ module Pages
     
             def selectSlot(slot)
                 return @driver.find_element(:xpath,"//option[text()[contains(.,'"+slot+"')]]")
+            end
+            
+            def getEmail()
+                    return @driver.find_element(:xpath,"//input[@class[contains(.,'text-field__input')]]")
             end
 
         end
