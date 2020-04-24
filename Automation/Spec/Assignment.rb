@@ -16,14 +16,14 @@ describe 'Assignment' do
         location_to_be_selected = 'Chennai'
         @assignment_home.chooseLocation(location_to_be_selected)
         
-        part1 = ['Tap']
-        @assignment_home.chooseThings(part1)
+        part = ['Tap']
+        @assignment_home.chooseThings(part)
 
-        action1 = ['Replace']
-        @assignment_home.chooseAction(action1)
+        action = ['Replace']
+        @assignment_home.chooseAction(action)
 
-        reason1 = ['Leak in a pipe']
-        @assignment_home.chooseReason(reason1)
+        reason = ['Leak in a pipe']
+        @assignment_home.chooseReason(reason)
 
         sampleText = 'Replacement needed in urgent'
         @assignment_home.comment(sampleText)
