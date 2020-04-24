@@ -1,4 +1,3 @@
-require 'selenium-webdriver'
 module Pages
         class AssignmentHome 
             LOCATION_TEXTBOX = {css: "input.postal-code"}
