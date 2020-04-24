@@ -9,7 +9,7 @@ describe 'Assignment' do
         # @driver = Driver.new
         @base_url = 'https://www.starofservice.in/dir/telangana/hyderabad/hyderabad/plumbing#/'
         @wait = Selenium::WebDriver::Wait.new(:timeout => 20,interval: 5)
-        @assignment_home = AssignmentHome.new(@driver)
+        @assignment_home = Pages::AssignmentHome.new(@driver)
         @driver.get(@base_url)
     end
 

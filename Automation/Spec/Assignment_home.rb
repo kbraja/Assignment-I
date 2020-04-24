@@ -1,8 +1,10 @@
 require 'selenium-webdriver'
 module Pages
         class AssignmentHome 
+            
             def initialize(driver)
                 @driver = driver
+                @wait = Selenium::WebDriver::Wait.new(:timeout => 10)
             end
 
             def clickGoButton()
@@ -24,8 +26,9 @@ module Pages
             def chooseLocation(location)
                 @driver.find_element(:css,'input.postal-code').clear()
                 @driver.find_element(:css,'input.postal-code').send_keys(location)
+                @wait.until{selectLocation(location).displayed?}
                 selectLocation(location).click()
-                clickGoButton()
+                @wait.until{ @driver.find_element(:xpath, "//button[text()='Next']").displayed?}
                 clickNextButton()
             end
 
@@ -132,5 +135,4 @@ module Pages
             end
 
         end
-    end
 end
