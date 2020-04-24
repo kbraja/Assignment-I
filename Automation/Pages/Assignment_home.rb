@@ -128,7 +128,7 @@ module Pages
             end
             
             def getEmail()
-                    return @driver.find_element(:xpath,"//input[@class[contains(.,'text-field__input')]]")
+                return @driver.find_element(:xpath,"//input[@class[contains(.,'text-field__input')]]")
             end
 
         end
