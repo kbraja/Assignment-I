@@ -35,7 +35,7 @@ describe 'Assignment' do
         @assignment_home.chooseData(noOfDayFromCurrentday)
  
         slot = '03:00'
-        duration = '4'
+        duration = 4
         @assignment_home.chooseSlot(slot,duration)
 
         @wait.until{(@assignment_home.getEmail()).displayed?}

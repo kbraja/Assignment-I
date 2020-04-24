@@ -172,14 +172,14 @@ module Pages
             #function to choose a slot 
             #
             #@param slot[String] slot to be selected
-            #@param duration[String] duration to be selected
+            #@param duration[Integer] duration to be selected
             def chooseSlot(slot,duration=nil)
                 timeSlot = @driver.find_element(TIME_SLOT)
                 options = timeSlot.find_elements(tag_name: 'option')
                 options.each { |option| option.click if option.text == slot}
                 if(duration!=nil)
                     @driver.find_element(DURATION).clear()
-                    @driver.find_element(DURATION).send_keys(duration)
+                    @driver.find_element(DURATION).send_keys(duration.to_s)
                 end
                 clickNextButton() 
             end
