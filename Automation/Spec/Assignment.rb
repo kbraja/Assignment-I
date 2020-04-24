@@ -42,7 +42,7 @@ describe 'Assignment' do
         duration = '4'
         @assignment_home.chooseSlot(slot,duration)
 
-        @wait.until{(@assignment_home.EMAIL).displayed?}
+        @wait.until{(@assignment_home.getEmail()).displayed?}
     end
 
     #Quit Browser
